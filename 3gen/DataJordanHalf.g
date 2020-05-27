@@ -8,31 +8,29 @@ gam:=Indeterminate(FF,"gam");;
 phi:=Indeterminate(FF,"phi");;
 F:=FunctionField(FF, 4);
 
-#### the basis: a, b, c, ab, bc, ac, a(bc), b(ca), c(ab)
-#### alp=(a,b), bet=(b,c), gam=(a,c), phi=(ab,c), where (,) is the Frobenius form
+## order in the basis: a, b, c, ab, bc, ac, a(bc), b(ca), c(ab)
+## alp=(a,b), bet=(b,c), gam=(a,c), phi=(ab,c)
 
 z:=alp^0;
 
-#### mas will contain table of products 
-#### fill products for a, b, and c by hands (first 3 rows of table of products)
+### fill products for a, b, and c by hands (first 3 rows of table of products)
 
-mas :=[
+mas :=z * [
 #a
-[[1*z,0*z,0*z,0*z,0*z,0*z,0*z,0*z,0*z], [0*z,0*z,0*z,1*z,0*z,0*z,0*z,0*z,0*z], [0*z,0*z,0*z,0*z,0*z,1*z,0*z,0*z,0*z], 
-[alp-eta*alp,0*z,0*z,eta,0*z,0*z,0*z,0*z,0*z], [0*z,0*z,0*z,0*z,0*z,0*z,1*z,0*z,0*z], [gam-eta*gam,0*z,0*z,0*z,0*z,eta,0*z,0*z,0*z], 
-[phi*(1-eta), 0*z,0*z,0*z,0*z,0*z,eta,0*z,0*z ], [alp*gam+1/2*eta*phi-2*eta*alp*gam, 0*z, 0*z, 1/2*eta*gam, 0*z, 1/2*eta*alp, 1/2*eta, 1/2*eta, -1/2*eta], [alp*gam+1/2*eta*phi-2*eta*alp*gam, 0*z, 0*z, 1/2*eta*gam, 0*z, 1/2*eta*alp, 1/2*eta, -1/2*eta, 1/2*eta]],
+[[1,0,0,0,0,0,0,0,0], [0,0,0,1,0,0,0,0,0], [0,0,0,0,0,1,0,0,0], 
+[alp-eta*alp,0,0,eta,0,0,0,0,0], [0,0,0,0,0,0,1,0,0], [gam-eta*gam,0,0,0,0,eta,0,0,0], 
+[phi*(1-eta), 0,0,0,0,0,eta,0,0 ], [alp*gam+1/2*eta*phi-2*eta*alp*gam, 0, 0, 1/2*eta*gam, 0, 1/2*eta*alp, 1/2*eta, 1/2*eta, -1/2*eta], [alp*gam+1/2*eta*phi-2*eta*alp*gam, 0, 0, 1/2*eta*gam, 0, 1/2*eta*alp, 1/2*eta, -1/2*eta, 1/2*eta]],
 #b
-[[0*z,0*z,0*z,1*z,0*z,0*z,0*z,0*z,0*z], [0*z,1*z,0*z,0*z,0*z,0*z,0*z,0*z,0*z], [0*z,0*z,0*z,0*z,1*z,0*z,0*z,0*z,0*z],
-[0*z,alp-eta*alp,0*z,eta,0*z,0*z,0*z,0*z,0*z], [0*z,bet-eta*bet,0*z,0*z,eta,0*z,0*z,0*z,0*z], [0*z,0*z,0*z,0*z,0*z,0*z,0*z,1*z,0*z], 
-[0*z, alp*bet+1/2*eta*phi-2*eta*alp*bet, 0*z, 1/2*eta*bet, 1/2*eta*alp, 0*z, 1/2*eta, 1/2*eta, -1/2*eta], [0*z, phi*(1-eta), 0*z,0*z,0*z,0*z,0*z,eta,0*z], [0*z, alp*bet+1/2*eta*phi-2*eta*alp*bet, 0*z, 1/2*eta*bet, 1/2*eta*alp, 0*z, -1/2*eta, 1/2*eta, 1/2*eta]],
+[[0,0,0,1,0,0,0,0,0], [0,1,0,0,0,0,0,0,0], [0,0,0,0,1,0,0,0,0],
+[0,alp-eta*alp,0,eta,0,0,0,0,0], [0,bet-eta*bet,0,0,eta,0,0,0,0], [0,0,0,0,0,0,0,1,0], 
+[0, alp*bet+1/2*eta*phi-2*eta*alp*bet, 0, 1/2*eta*bet, 1/2*eta*alp, 0, 1/2*eta, 1/2*eta, -1/2*eta], [0, phi*(1-eta), 0,0,0,0,0,eta,0], [0, alp*bet+1/2*eta*phi-2*eta*alp*bet, 0, 1/2*eta*bet, 1/2*eta*alp, 0, -1/2*eta, 1/2*eta, 1/2*eta]],
 #c
-[[0*z,0*z,0*z,0*z,0*z,1*z,0*z,0*z,0*z], [0*z,0*z,0*z,0*z,1*z,0*z,0*z,0*z,0*z], [0*z,0*z,1*z,0*z,0*z,0*z,0*z,0*z,0*z], 
-[0*z,0*z,0*z,0*z,0*z,0*z,0*z,0*z,1*z], [0*z,0*z,bet-eta*bet,0*z,eta,0*z,0*z,0*z,0*z], [0*z,0*z,gam-eta*gam,0*z,0*z,eta,0*z,0*z,0*z], 
-[0*z, 0*z, bet*gam+1/2*eta*phi-2*eta*bet*gam,0*z,1/2*eta*gam,1/2*eta*bet,1/2*eta, -1/2*eta, 1/2*eta], [0*z, 0*z, bet*gam+1/2*eta*phi-2*eta*bet*gam,0*z,1/2*eta*gam,1/2*eta*bet,-1/2*eta, 1/2*eta, 1/2*eta], [0*z, 0*z, phi*(1-eta), 0*z,0*z,0*z,0*z,0*z,eta]]
+[[0,0,0,0,0,1,0,0,0], [0,0,0,0,1,0,0,0,0], [0,0,1,0,0,0,0,0,0], 
+[0,0,0,0,0,0,0,0,1], [0,0,bet-eta*bet,0,eta,0,0,0,0], [0,0,gam-eta*gam,0,0,eta,0,0,0], 
+[0, 0, bet*gam+1/2*eta*phi-2*eta*bet*gam,0,1/2*eta*gam,1/2*eta*bet,1/2*eta, -1/2*eta, 1/2*eta], [0, 0, bet*gam+1/2*eta*phi-2*eta*bet*gam,0,1/2*eta*gam,1/2*eta*bet,-1/2*eta, 1/2*eta, 1/2*eta], [0, 0, phi*(1-eta), 0,0,0,0,0,eta]]
 ];
 
-
-empty:=[0*z,0*z,0*z,0*z,0*z,0*z,0*z,0*z,0*z];
+empty:=z*[0,0,0,0,0,0,0,0,0];
 
 for i in [4..9] do
 Add(mas, []);
@@ -58,14 +56,17 @@ for j in [1..9] do
     copy(i,j);
 od;od;
 
+################################
+
 ########################################################################
 ### prod evaluates products of two vectors u and v using the array mas
 ########################################################################
+
 prod := function(u,v)
 
 local i,j,k, ans;
 
-ans:=[0*z,0*z,0*z,0*z,0*z,0*z,0*z,0*z,0*z];
+ans:=z * [0,0,0,0,0,0,0,0,0];
 
 for i in [1..9] do
 for j in [1..9] do
@@ -94,6 +95,7 @@ cab:=z*[0,0,0,0,0,0,0,0,1];
 ###############################################
 ### now we fill other elements of mas
 ###############################################
+
 
 ## ab*ab = ab*(ab-eta*b)
 mas[4][4] := prod(a, prod(b, ab - eta*b)) + eta*prod(b,ab);
@@ -186,8 +188,6 @@ prod(a, ab - alp*a) = eta*(ab - alp*a);
 prod(a, ac - gam*a) = eta*(ac - gam*a);
 prod(a, abc - phi * a) = eta * (abc - phi*a);
 
-##### fill bases for eigenspaces
-
 bas1:=[a];
 bas0:=[ab - alp* a/2 - b/2, ac - gam* a/2 - c/2, abc - 1/2*bc - phi/2*a, bac +cab - 1/2*bc - 1/2*alp*c - 1/2*gam*b - 1/2*phi*a];
 bas10:=[a, ab - alp* a/2 - b/2, ac - gam* a/2 - c/2, abc - 1/2*bc - phi/2*a, bac +cab - 1/2*bc - 1/2*alp*c - 1/2*gam*b - 1/2*phi*a];
@@ -205,12 +205,13 @@ base:=[bac - cab, ab - alp*a, ac - gam*a, abc - phi * a];
 #bas10:=[c, ac - gam* c/2 - a/2, bc - bet*c/2 - b/2, cab - 1/2*ab - phi/2*c, abc+bac - 1/2*ab - 1/2*gam*b - 1/2*bet*a - 1/2*phi*c];
 #base:=[abc-bac, ac - gam*c, bc - bet*c, cab - phi * c];
 
+
 U0:=VectorSpace(F, bas0);
 U1:=VectorSpace(F, bas1);
 U10:=VectorSpace(F, bas10);
 Ue:=VectorSpace(F, base);
 
-#### verification of the fusion rules
+#### verification of the fusion rules (do not foget about additional equalities for alp, bet, gam and phi)
 
 for i in base do
 for j in base do
@@ -233,70 +234,30 @@ if not prod(i,j) in U0 then
 fi;
 od;od;
 
-##### basis of the 9-dimensional algebra
+#### the Gram matrix, its determinant equals 1/1024*(alp*bet*gam-phi^2)^3*(alp+bet+gam-2*phi-1)^6$
 
-L:=[a, b, c, ab, bc, ac, abc, bac, cab];
+Gram:=z * [ [ 1, alp, gam, alp, phi, gam, phi, 1/2*alp*gam+1/2*phi, 1/2*alp*gam+1/2*phi ], [ alp, 1, bet, alp, bet, phi, 1/2*alp*bet+1/2*phi, phi, 1/2*alp*bet+1/2*phi ], [ gam, bet, 1, phi, bet, gam, 1/2*bet*gam+1/2*phi, 1/2*bet*gam+1/2*phi, phi ], 
+  [ alp, alp, phi, 1/2*alp^2+1/2*alp, 1/2*alp*bet+1/2*phi, 1/2*alp*gam+1/2*phi, 1/4*alp*bet+1/2*alp*phi+1/4*phi, 1/4*alp*gam+1/2*alp*phi+1/4*phi, 1/4*alp*bet+1/4*alp*gam+1/2*alp*phi ], [ phi, bet, bet, 1/2*alp*bet+1/2*phi, 1/2*bet^2+1/2*bet, 1/2*bet*gam+1/2*phi, 
+      1/4*alp*bet+1/4*bet*gam+1/2*bet*phi, 1/4*bet*gam+1/2*bet*phi+1/4*phi, 1/4*alp*bet+1/2*bet*phi+1/4*phi ], [ gam, phi, gam, 1/2*alp*gam+1/2*phi, 1/2*bet*gam+1/2*phi, 1/2*gam^2+1/2*gam, 1/4*bet*gam+1/2*gam*phi+1/4*phi, 1/4*alp*gam+1/4*bet*gam+1/2*gam*phi, 
+      1/4*alp*gam+1/2*gam*phi+1/4*phi ], [ phi, 1/2*alp*bet+1/2*phi, 1/2*bet*gam+1/2*phi, 1/4*alp*bet+1/2*alp*phi+1/4*phi, 1/4*alp*bet+1/4*bet*gam+1/2*bet*phi, 1/4*bet*gam+1/2*gam*phi+1/4*phi, 1/8*alp*bet+1/8*bet*gam+1/4*bet*phi+1/2*phi^2, 
+      1/4*alp*bet*gam+1/8*alp*phi+1/8*bet*gam+1/8*bet*phi+1/8*gam*phi+1/4*phi^2, 1/4*alp*bet*gam+1/8*alp*bet+1/8*alp*phi+1/8*bet*phi+1/8*gam*phi+1/4*phi^2 ], [ 1/2*alp*gam+1/2*phi, phi, 1/2*bet*gam+1/2*phi, 1/4*alp*gam+1/2*alp*phi+1/4*phi, 
+      1/4*bet*gam+1/2*bet*phi+1/4*phi, 1/4*alp*gam+1/4*bet*gam+1/2*gam*phi, 1/4*alp*bet*gam+1/8*alp*phi+1/8*bet*gam+1/8*bet*phi+1/8*gam*phi+1/4*phi^2, 1/8*alp*gam+1/8*bet*gam+1/4*gam*phi+1/2*phi^2, 
+      1/4*alp*bet*gam+1/8*alp*gam+1/8*alp*phi+1/8*bet*phi+1/8*gam*phi+1/4*phi^2 ], [ 1/2*alp*gam+1/2*phi, 1/2*alp*bet+1/2*phi, phi, 1/4*alp*bet+1/4*alp*gam+1/2*alp*phi, 1/4*alp*bet+1/2*bet*phi+1/4*phi, 1/4*alp*gam+1/2*gam*phi+1/4*phi, 
+      1/4*alp*bet*gam+1/8*alp*bet+1/8*alp*phi+1/8*bet*phi+1/8*gam*phi+1/4*phi^2, 1/4*alp*bet*gam+1/8*alp*gam+1/8*alp*phi+1/8*bet*phi+1/8*gam*phi+1/4*phi^2, 1/8*alp*bet+1/8*alp*gam+1/4*alp*phi+1/2*phi^2 ] ]
+;;
 
-#### first 3 rows of Gram matrix are entered by hands
+#### Miyamoto involutions          
+        
+taua:= z * [ [ 1, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 4*alp, 1, 0, -4, 0, 0, 0, 0, 0 ], [ 4*gam, 0, 1, 0, 0, -4, 0, 0, 0 ], [ 2*alp, 0, 0, -1, 0, 0, 0, 0, 0 ], 
+  [ 4*phi, 0, 0, 0, 1, 0, -4, 0, 0 ], [ 2*gam, 0, 0, 0, 0, -1, 0, 0, 0 ], [ 2*phi, 0, 0, 0, 0, 0, -1, 0, 0 ], [ 2*alp*gam+phi, 0, 0, -gam, 0, -alp, -1, 0, 1 ], [ 2*alp*gam+phi, 0, 0, -gam, 0, -alp, -1, 1, 0 ] ];;
 
-Gram := [
-[1, alp, gam, alp, phi, gam, phi, 1/2*gam*alp + 1/2*phi, 1/2*gam*alp + 1/2*phi],
-[alp, 1, bet, alp, bet, phi, 1/2*alp*bet + 1/2*phi, phi, 1/2*alp*bet + 1/2*phi],
-[gam, bet, 1, phi, bet, gam, 1/2*bet*gam + 1/2*phi, 1/2*bet*gam + 1/2*phi, phi]
-];
+taub:= z * [ [ 1, 4*alp, 0, -4, 0, 0, 0, 0, 0 ], [ 0, 1, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 4*bet, 1, 0, -4, 0, 0, 0, 0 ], [ 0, 2*alp, 0, -1, 0, 0, 0, 0, 0 ], 
+  [ 0, 2*bet, 0, 0, -1, 0, 0, 0, 0 ], [ 0, 4*phi, 0, 0, 0, 1, 0, -4, 0 ], [ 0, 2*alp*bet+phi, 0, -bet, -alp, 0, 0, -1, 1 ], [ 0, 2*phi, 0, 0, 0, 0, 0, -1, 0 ], [ 0, 2*alp*bet+phi, 0, -bet, -alp, 0, 1, -1, 0 ] ];;
 
-##### now fill other elements of the Gram matrix
+tauc:= z* [ [ 1, 0, 4*gam, 0, 0, -4, 0, 0, 0 ], [ 0, 1, 4*bet, 0, -4, 0, 0, 0, 0 ], [ 0, 0, 1, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 4*phi, 1, 0, 0, 0, 0, -4 ], 
+  [ 0, 0, 2*bet, 0, -1, 0, 0, 0, 0 ], [ 0, 0, 2*gam, 0, 0, -1, 0, 0, 0 ], [ 0, 0, 2*bet*gam+phi, 0, -gam, -bet, 0, 1, -1 ], [ 0, 0, 2*bet*gam+phi, 0, -gam, -bet, 1, 0, -1 ], [ 0, 0, 2*phi, 0, 0, 0, 0, 0, -1 ] ];;
 
-for i in [4..9] do
-    Add(Gram, []);
-    for j in [1..9] do
-        Add(Gram[i], 0*z);
-    od;
-od;
+  
+################ the identity element
 
-
-
-for i in [1..9] do
-tmp:=prod(b, L[i]);
-for j in [1..9] do
-    Gram[4][i]:=Gram[4][i]+Gram[1][j]*tmp[j];
-    Gram[5][i]:=Gram[5][i]+Gram[3][j]*tmp[j];
-od;
-od;
-
-for i in [1..9] do
-tmp:=prod(c, L[i]);
-for j in [1..9] do
-    Gram[6][i]:=Gram[6][i]+Gram[1][j]*tmp[j];
-    Gram[9][i]:=Gram[9][i]+Gram[4][j]*tmp[j];
-od;
-od;
-
-for i in [1..9] do
-tmp:=prod(a, L[i]);
-for j in [1..9] do
-    Gram[7][i]:=Gram[7][i]+Gram[5][j]*tmp[j];
-od;
-od;
-
-for i in [1..9] do
-tmp:=prod(b, L[i]);
-for j in [1..9] do
-    Gram[8][i]:=Gram[8][i]+Gram[6][j]*tmp[j];
-od;
-od;
-
-### det Gram = (alp+bet+gam-2*phi-1)^6*(alp*bet*gam-phi^2)^3
-
-###################################################################
-
-### matrices of Miyamoto involutions
-
-taua:=z* [ [ 1, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 4*alp, 1, 0, -4, 0, 0, 0, 0, 0 ], [ 4*gam, 0, 1, 0, 0, -4, 0, 0, 0 ], [ 2*alp, 0, 0, -1, 0, 0, 0, 0, 0 ], 
-  [ 4*phi, 0, 0, 0, 1, 0, -4, 0, 0 ], [ 2*gam, 0, 0, 0, 0, -1, 0, 0, 0 ], [ 2*phi, 0, 0, 0, 0, 0, -1, 0, 0 ], [ 2*alp*gam+phi, 0, 0, -gam, 0, -alp, -1, 0, 1 ], [ 2*alp*gam+phi, 0, 0, -gam, 0, -alp, -1, 1, 0 ] ];
- 
-taub:=z*  [ [ 1, 4*alp, 0, -4, 0, 0, 0, 0, 0 ], [ 0, 1, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 4*bet, 1, 0, -4, 0, 0, 0, 0 ], [ 0, 2*alp, 0, -1, 0, 0, 0, 0, 0 ], 
-  [ 0, 2*bet, 0, 0, -1, 0, 0, 0, 0 ], [ 0, 4*phi, 0, 0, 0, 1, 0, -4, 0 ], [ 0, 2*alp*bet+phi, 0, -bet, -alp, 0, 0, -1, 1 ], [ 0, 2*phi, 0, 0, 0, 0, 0, -1, 0 ], [ 0, 2*alp*bet+phi, 0, -bet, -alp, 0, 1, -1, 0 ] ];
-
-tauc:=z* [ [ 1, 0, 4*gam, 0, 0, -4, 0, 0, 0 ], [ 0, 1, 4*bet, 0, -4, 0, 0, 0, 0 ], [ 0, 0, 1, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 4*phi, 1, 0, 0, 0, 0, -4 ], 
-  [ 0, 0, 2*bet, 0, -1, 0, 0, 0, 0 ], [ 0, 0, 2*gam, 0, 0, -1, 0, 0, 0 ], [ 0, 0, 2*bet*gam+phi, 0, -gam, -bet, 0, 1, -1 ], [ 0, 0, 2*bet*gam+phi, 0, -gam, -bet, 1, 0, -1 ], [ 0, 0, 2*phi, 0, 0, 0, 0, 0, -1 ] ];
+id:=z/(alp+bet+gam-2*phi-1)*[bet - 1, gam-1, alp-1, 2, 2, 2, -2, -2, -2];
