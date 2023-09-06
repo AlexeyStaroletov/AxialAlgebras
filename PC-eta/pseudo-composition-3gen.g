@@ -35,14 +35,14 @@ for i in [1..8] do
         Add(mas[i][j], z*0);
 od;od;od;
 
-copy := function(i,j) ### function to make the product symmetric: mas[i][j] = mas[j][i]
+copy := function(i,j) ### this function makes the product symmetric: mas[i][j] = mas[j][i]
   local k;
   for k in [1..8] do
     mas[j][i][k]:=mas[i][j][k];
   od;
 end;
 
-prod := function(u,v)    ### function which find the product of two vectors u and v written with respect to L
+prod := function(u,v)    ### function which finds the product of two vectors u and v written with respect to L
   local i,j,k, ans;
   ans:=z * 0*a;
   for i in [1..8] do
