@@ -1,5 +1,5 @@
-##### This file contains commands for checking the linearized Jordan identity in the Matsuo algebra M_{1/2}(G,D), where G is a 3-transposition group
-##### G=3^6:Sym(7)=Wr(3,7)
+##### This file contains commands for checking the linearized Jordan identity in the Matsuo algebra M_{1/2}(G,D), 
+##### where G=3^6:Sym(7)=Wr(3,7)
 
 ##### build the group
 
