@@ -1,4 +1,5 @@
 ##### Calculations in Octonion and Albert algebras
+##### for details see https://arxiv.org/abs/2305.10958
 
 bas:=
 [
