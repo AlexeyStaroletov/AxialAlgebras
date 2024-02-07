@@ -9,8 +9,6 @@ G:=WreathProduct(N,H);
 a:=Image(Embedding(G,6), (1,2));
 G:=NormalClosure(G, [a]);
 
-##### Common code for all groups
-
 ##### the following function verifies that a list of involutions is a set of 3-transpositions
 
 check := function(class)
