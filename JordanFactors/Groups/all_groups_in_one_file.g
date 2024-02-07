@@ -1,4 +1,5 @@
 ##### This file contains commands for checking the linearized Jordan identity in some Matsuo algebras.
+##### Calculations are used in the paper https://arxiv.org/abs/2305.10958
 
 ##### First we have a list of groups to check, choose any of them and continue.
 
