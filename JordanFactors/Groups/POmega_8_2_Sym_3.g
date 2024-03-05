@@ -125,14 +125,18 @@ res:=true;
 
 x:=L[1];                      ##### now we verify the linearized Jordan identity on elements from inv. Since inv is a conjugacy class, we can fix the first element x.
 for j in [1..Size(inv)] do
-for k in [1..Size(inv)] do
-for t in [1..Size(inv)] do
- y:=L[j];
- z:=L[k];
- w:=L[t];
- if not ( assos(prod(x,z), y, w) + assos(prod(z,w), y, x) + assos(prod(w,x), y, z) in W) then
-   res:=false;
- fi;
-od;od;od;
+  if res = false then 
+    break;
+  fi;
+  for k in [1..Size(inv)] do
+  for t in [1..Size(inv)] do
+    y:=L[j];
+    z:=L[k];
+    w:=L[t];
+    if not ( assos(prod(x,z), y, w) + assos(prod(z,w), y, x) + assos(prod(w,x), y, z) in W) then
+      res:=false;
+    fi;
+  od;od;
+od;
 
 res;  ##### this variable tells us the result of verification.
